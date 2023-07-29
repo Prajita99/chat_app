@@ -10,8 +10,10 @@ class WelcomeScreen extends StatefulWidget {
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProviderStateMixin { //to init. ticker we need to add this
 
+  AnimationController ?controller;
+  Animation ?animation;
   Shader linearGradientText(double width, double height) {
   return LinearGradient(
     colors: <Color>[Colors.lightBlueAccent, Colors.blueAccent], // Replace with your desired colors
@@ -19,6 +21,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     end: Alignment.centerRight,
   ).createShader(Rect.fromLTRB(0, 0, width, height));
 }
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      duration: Duration(seconds: 1),
+      vsync: this, //current welcome screen state provides ticker
+    );
+
+  animation = CurvedAnimation(parent: controller!, curve: Curves.decelerate);
+
+    controller?.forward();
+    controller?.addListener(() {
+      setState(() {
+        
+      });
+      print(animation?.value);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +51,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: 130.0,
-              child: Image.asset('images/logo.png'),
+            Hero(
+              tag:'logo',
+              child: Container(
+                height: animation!.value * 100,
+                child: Image.asset('images/logo.png'),
+              ),
             ),
 
                 ShaderMask(
