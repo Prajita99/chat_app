@@ -1,27 +1,33 @@
 name: chat_app
 description: A new Flutter project.
 
-publish_to: 'none'  
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
   sdk: '>=3.0.1 <4.0.0'
 
 dependencies:
+  animated_text_kit: ^4.2.2
+  cloud_firestore: ^4.8.4
+  cupertino_icons: ^1.0.2
+  firebase_auth: ^4.7.2
+  firebase_core: ^2.15.0
+  firebase_messaging: ^14.6.5
+  firebase_storage: ^11.2.5
+  modal_progress_hud_nsn: ^0.4.0
+
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
-
 dev_dependencies:
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-
-  flutter_lints: ^2.0.0
 
 flutter:
 
   uses-material-design: true
 
   assets:
-  - images/
+    - images/
